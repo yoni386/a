@@ -1,0 +1,40 @@
+<div class="modal-header">
+
+    <h4 class="modal-title"><i class="fa fa-exclamation-triangle"></i> Restore vm confirmation!</h4>
+
+</div>
+
+<div class="modal-body">
+
+
+    <div>
+        <h5>You are about to restore <strong ng-bind="vm_name"></strong> <small> ID <strong ng-bind="req_id"></strong>.</small></h5>
+    </div>
+
+    <div>
+        <h5><strong>Summary :</strong></h5>
+    </div>
+
+    <div>
+        <h6>
+            <p>Virtual Machine <strong ng-bind="vm_name"></strong> will be deleted.
+                <input type="checkbox" id="1" popover="Approval is required. VM will be replaced" popover-trigger="mouseenter" popover-placement="right" ng-model="checked_approval1">
+            </p>
+            <p>Virtual Machine <strong ng-bind="vm_name"></strong> will be restore to <strong ng-bind="snap_date"></strong>
+                <input type="checkbox" popover="Approval is required. VM will be overwritten!" popover-trigger="mouseenter" popover-placement="top" ng-model="checked_approval2">
+            </p>
+        </h6>
+
+    </div>
+
+</div>
+
+<div class="modal-footer">
+
+    <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+
+    <button type="submit" class="btn btn-primary" ng-disabled="!checked_approval1 || !checked_approval2" ng-click="fn_req_start(x.id)">OK</button>
+
+
+</div>
+

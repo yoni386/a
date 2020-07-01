@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html ng-app="myApp"[]>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="css/style.css" type="text/css"/>
+
+    <title>Phone Book</title>
+
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <!--<link href="css/normalize.css" rel="stylesheet" media="screen">-->
+    <!--<link href="css/foundation.min.css" rel="stylesheet" media="screen">-->
+    <!--<link href="css/app-screen.css" rel="stylesheet" media="screen">-->
+    <!--<link href="css/app-print.css" rel="stylesheet" media="print">-->
+    <script src="js/angular.min.js"></script>
+    <script src="js/phone_book2.js"></script>
+
+    <!--<style>-->
+        <!--table, th , td  {-->
+            <!--border: 1px solid grey;-->
+            <!--border-collapse: collapse;-->
+            <!--padding: 5px;-->
+
+        <!--}-->
+        <!--table tr:nth-child(odd)	{-->
+            <!--background-color: #f1f1f1;-->
+        <!--}-->
+        <!--table tr:nth-child(even) {-->
+            <!--background-color: #ffffff;-->
+        <!--}-->
+    <!--</style>-->
+
+
+</head>
+<body class="body" ng-controller="Phone_book1">
+
+<header class="mainheader">
+
+    <nav><ul>
+        <li><a href="/">Restore VM</a></li>
+        <li><a href="#">vCloud</a></li>
+        <li><a href="Daily">Daily</a></li>
+        <li><a href="/new-vm2">New VM</a></li>
+        <li><a href="/Network">Network</a></li>
+        <li class="active"><a href="/Phone-Book1">Phone-Book</a></li>
+        <li><a href="#">Future</a></li>
+    </ul></nav>
+</header>
+
+<div class="maincontent">
+    <div class="content">
+        <article class="topcontent">
+            <header>
+                <h2><a href="#" title="Phone_book1">Phone book</a></h2>
+            </header>
+
+            <footer>
+                <p class="post-info"></p>
+
+                <!--                </footer>-->
+
+                <!--<form name="form_restore_vm_id1" id="form_restore_vm_id1" action="" method="POST">-->
+                    <!--<fieldset>-->
+                        <!--<legend>Restore Details</legend>-->
+                        <!--<div>-->
+                            <!--&lt;!&ndash; The Namgrgregee form field &ndash;&gt;-->
+                            <!--<label for="user_input1-lebel" id="user_input1-lebel">Virtual Machine Name</label>-->
+                            <!--<input type="text" name="user_input1" id="user_input1" size="30" autocomplete="off" placeholder="BMW-110-XXX-XXX" autofocus value="" required pattern="[A-Za-z-0-9.]+" aria-required="true" aria-describedby="name-format">-->
+                            <!--<span id="name-format" class="help">Enter VM Name eg: BMW-115-101.ccccloud.com</span>-->
+                        <!--</div>-->
+                        <!--&lt;!&ndash;		</fieldset>	&ndash;&gt;-->
+                        <!--<br>-->
+
+                        <!--<div>-->
+                            <!--&lt;!&ndash; The rgreg form field &ndash;&gt;-->
+                            <!--<label for="user_input2-lebel" id="user_input2-lebel">Date to restore to</label>-->
+                            <!--<input type="text" name="user_input2" id="user_input2" autocomplete="off" size="30" value=""/>-->
+                        <!--</div>-->
+                        <!--<br>-->
+                        <!--<div>-->
+                            <!--<label for="user_input3-lebel" id="user_input3-lebel">VM Owner Email</label>-->
+                            <!--<input type="email" name="user_input3" id="user_input3" autocomplete="off" size="30" value=""/>-->
+                        <!--</div>-->
+
+                        <!--<br>-->
+                        <!--<div>-->
+                            <!--<label for="user_input4-lebel" id="user_input4-lebel">Internal Email</label>-->
+                            <!--<input type="email" name="user_input4" id="user_input4" autocomplete="off" size="30" value=""/>-->
+                        <!--</div>-->
+
+                        <!--<style>-->
+                            <!--label.user_input2-lebel { width: 250px; display: inline; color: red;}-->
+                        <!--</style>-->
+                        <!--<br>-->
+
+
+                        <!--&lt;!&ndash;         </form> &ndash;&gt;-->
+
+                        <!--&lt;!&ndash; The Submit button &ndash;&gt;-->
+                    <!--</fieldset>-->
+
+                    <!--<input type="submit" name="submit" value="Restore VM">-->
+                <!--</form>-->
+
+
+
+
+                <div class="phone_book1">
+
+                    <label for="user_input1-lebel" id="user_input1-lebel">Search :</label>
+
+                    <input text="Search" ng-model="search" placeholder="Write Something" autofocus value="">
+                    <br>
+
+                    <!--<table class="table">-->
+                        <!--<tr>-->
+
+                            <!--<th>Name</th>-->
+                            <!--<th>Last Name</th>-->
+                            <!--<th>Email</th>-->
+                            <!--<th>Team</th>-->
+                            <!--<th>Phone</th>-->
+                            <!--<th>Mobile</th>-->
+                            <!--<th>Floor</th>-->
+                        <!--</tr>-->
+                        <!---->
+                    <!--</table>-->
+
+                    <table>
+                        <th>Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Team</th>
+                        <th>Phone</th>
+                        <th>Mobile</th>
+                        <th>Floor</th>
+
+                        <tr ng-repeat="item in items | filter:search ">
+
+                             <td>{{ item.name }}</td>
+                             <td>{{ item.last_name }}</td>
+                             <td>{{ item.email }}</td>
+                             <td>{{ item.team }}</td>
+                             <td>{{ item.phone }}</td>
+                             <td>{{ item.mobile_phone }}</td>
+                             <td>{{ item.floor }}</td>
+                         </tr>
+                    </table>
+
+                </div>
+
+
+                <!-- We will output the results from restore_ps1.php here -->
+
+            </footer>
+
+            <content>
+                <p></p>
+
+            </content>
+        </article>
+        <!--<article class="second_content">-->
+            <!--<header>-->
+                <!--<h2><a href="#" title="Output">Output Summary</a></h2>-->
+            <!--</header>-->
+
+            <!--<footer>-->
+                <!--<p class="post-info">-->
+                    <!--info  = Information Only. <br>-->
+                    <!--Debug = Information with Action. <br>-->
+                    <!--Error = Restore will not complete.-->
+                <!--</p>-->
+            <!--</footer>-->
+
+
+            <!--&lt;!&ndash;<content>&ndash;&gt;-->
+                <!--&lt;!&ndash;<p> Read log file.</p>&ndash;&gt;-->
+
+                <!--&lt;!&ndash;<div id="results"></div>&ndash;&gt;-->
+                <!--&lt;!&ndash;<H3> Messages </H3>&ndash;&gt;-->
+                <!--&lt;!&ndash;<hr />&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="jclock"></div>&ndash;&gt;-->
+                <!--&lt;!&ndash;<div id="messages"><div id="msgold">&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</content>&ndash;&gt;-->
+        <!--</article>-->
+    </div>
+</div>
+
+
+
+<footer class="mainfooter">
+    <p>Beta version 1.1</p>
+
+</footer>
+
+
+
+
+
+
+
+
+</body>
+</html>

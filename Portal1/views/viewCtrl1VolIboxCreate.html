@@ -1,0 +1,85 @@
+
+
+<title>IBOX Create Volume</title>
+
+
+
+<div class="page-header header_custom">
+    <h1>IBOX<small> Create Volume</small></h1>
+</div>
+
+<div class="row">
+
+    <form name="vol_Form">
+
+        <div class="col-md-2 col-xs-2 .col-sm-2">
+            <input type="text" class="form-control" name="volName" ng-model="vol_Form.vol_name" placeholder="Vol Name" required>
+        </div>
+
+
+        <div class="col-md-2 col-xs-2 .col-sm-2">
+            <input type="number" min="1" class="form-control" name="volSize" ng-model="vol_Form.vol_size" placeholder="Vol Size" required>
+        </div>
+
+
+        <div class="col-md-2 col-xs-2 .col-sm-2">
+
+            <select type="text" class="form-control" name="unit" ng-model="vol_Form.unit" placeholder="Unit Size" ng-options="option.name for option in unit_options" required>
+                <option value="">Select One</option>
+            </select>
+
+        </div>
+
+
+        <div class="col-md-2 col-xs-2 .col-sm-2">
+
+            <select class="form-control" ng-model="vol_Form.options_os_type" ng-options="option.name for option in options_os_type">
+                <option value="">Select OS</option>
+            </select>
+
+        </div>
+
+
+        <div class="col-md-2 col-xs-2 .col-sm-2">
+            <input type="text" class="form-control" ng-model="vol_Form.clusterName" placeholder="Cluster Name" required>
+        </div>
+
+
+        <div class="col-md-2 col-xs-2 .col-sm-2">
+            <input type="number" min="1" class="form-control" ng-model="vol_Form.LunId" placeholder="Lun ID" required>
+        </div>
+
+
+
+    </form>
+
+</div>
+
+<hr>
+
+
+<div class="echo_custom1">
+
+    <tt>Vol Name = {{vol_Form.vol_name | lowercase}}</tt><br/>
+    <tt>Vol Size = {{vol_Form.vol_size}}</tt><br/>
+    <tt>Unit Size = {{vol_Form.unit.name}}</tt><br/>
+    <tt>Unit Value = {{vol_Form.unit.value}}</tt><br/>
+    <tt>OS Name = {{vol_Form.options_os_type.name}}</tt><br/>
+    <tt>File System Value = {{vol_Form.options_os_type.value}}</tt><br/>
+    <tt>Cluster Name = {{vol_Form.clusterName}}</tt><br/>
+    <tt>lun_id = {{vol_Form.LunId}}</tt><br/>
+
+</div>
+
+<div class="btn btn-primary" ng-disabled="vol_Form.$invalid" ng-click="vol_Function(vol_Form) ; textarea_copy = true">OK</div>
+
+
+
+
+
+<span ng-show="textarea_copy">
+    <button ui-zeroclip class="btn btn-primary" ng-click="value_copy = true" zeroclip-text="{{ all }}">Copy</button>
+    <button ui-zeroclip class="btn btn-primary" ng-click="vol_Form = null ; max_size = null ; qtree_path = null ; textarea_copy = false ; value_copy = false" zeroclip-text="Enter data and copy again">Clear All</button>
+    <span class="form-control form-control-custom1" ng-show="value_copy">Successfully Copied!</span>
+    <textarea class="form-control form-control-custom1" placeholder="Copy here" rows="4" ng-model="all" ng-change="value_copy = false" ></textarea>
+</span>

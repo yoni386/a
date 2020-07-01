@@ -1,0 +1,102 @@
+
+<title>NetApp Create Volume</title>
+
+<div class="page-header header_custom">
+    <h1>NetApp<small> Create Volume</small></h1>
+</div>
+
+<div class="row">
+
+    <form name="vol_Form" class="pull-right">
+
+        <div class="col-md-1 col-xs-1 .col-sm-1">
+
+            <input type="text" class="form-control" name="volName" ng-model="vol_Form.vol_name" placeholder="Vol Name" required>
+
+        </div>
+
+
+        <div class="col-md-1 col-xs-1 .col-sm-1">
+
+            <input type="number" min="1" class="form-control" name="volSize" ng-model="vol_Form.vol_size" ng-change="vol_size_max_Function(vol_Form.vol_size)" placeholder="Vol Size" required>
+
+        </div>
+
+
+        <div class="col-md-1 col-xs-1 .col-sm-1">
+
+            <select type="text" class="form-control" name="unit" ng-model="vol_Form.unit" placeholder="Unit Size" ng-options="option.name for option in unit_options" required>
+                <option value="">Select One</option>
+            </select>
+
+        </div>
+
+        <div class="col-md-1 col-xs-1 .col-sm-1">
+
+            <select class="form-control" ng-model="vol_Form.os_qtree_security_options" ng-options="option.name for option in os_qtree_security_options">
+                <option value="">Select OS</option>
+            </select>
+
+        </div>
+
+        <div class="col-md-1 col-xs-1 .col-sm-1">
+
+            <input type="number" min="1" class="form-control" ng-model="vol_Form.increment_size" placeholder="Increment" required>
+
+        </div>
+
+
+        <div class="col-md-1 col-xs-1 .col-sm-1">
+            <input type="number" min="1" class="form-control" ng-model="max_size" placeholder="Max Size" required>
+        </div>
+
+
+        <div class="col-md-1 col-xs-1 .col-sm-1">
+            <input type="number" min="1" class="form-control" ng-model="vol_Form.lun_size" placeholder="Lun Size" required>
+        </div>
+
+        <div class="col-md-1 col-xs-1 .col-sm-1">
+            <input type="text" class="form-control" ng-model="vol_Form.igroup_name" placeholder="Igroup Name" required>
+        </div>
+
+
+        <div class="col-md-1 col-xs-1 .col-sm-1">
+            <input type="number" min="0" class="form-control" ng-model="vol_Form.lun_id" placeholder="Lun ID" required>
+        </div>
+
+        <div class="col-md-3 col-xs-3 .col-sm-3"></div>
+
+
+    </form>
+
+</div>
+
+
+<hr>
+
+<div class="echo_custom1">
+
+<tt>Vol Name = {{vol_Form.vol_name | lowercase}}</tt><br/>
+    <tt>Vol Size = {{vol_Form.vol_size}}</tt><br/>
+    <tt>Unit Size = {{vol_Form.unit.name}}</tt><br/>
+    <tt>Vol Increment Size = {{vol_Form.increment_size}}</tt><br/>
+    <tt>Unit Value = {{vol_Form.unit.value}}</tt><br/>
+    <tt>Max Size = {{max_size}}</tt><br/>
+    <tt>Qtree Path = {{qtree_path | lowercase}}</tt><br/>
+    <tt>OS Name = {{vol_Form.os_qtree_security_options.name}}</tt><br/>
+    <tt>Qtree Security = {{vol_Form.os_qtree_security_options.qtree_security}}</tt><br/>
+    <tt>OS Type = {{vol_Form.os_qtree_security_options.os}}</tt><br/>
+    <tt>lun_id = {{vol_Form.lun_id}}</tt><br/>
+
+</div>
+
+
+<div class="btn btn-primary" ng-disabled="vol_Form.$invalid" ng-click="vol_Function(vol_Form) ; textarea_copy=true">OK</div>
+
+
+<span ng-show="textarea_copy">
+    <button ui-zeroclip class="btn btn-primary" ng-click="value_copy=true" zeroclip-text="{{ all | lowercase }}">Copy</button>
+    <button ui-zeroclip class="btn btn-primary" ng-click="vol_Form = null ; max_size = null ; qtree_path = null ; textarea_copy=false ; value_copy = false" zeroclip-text="Enter data and copy again">Clear All</button>
+    <span class="form-control form-control-custom1" ng-show="value_copy">Successfully Copied!</span>
+    <textarea class="form-control form-control-custom1" placeholder="Copy here" rows="19" ng-model="all" ng-change="value_copy=false"></textarea>
+</span>

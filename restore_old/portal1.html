@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <title>Restore VM</title>
+    <meta charset="utf-8" />
+
+    <link rel="stylesheet" href="/css/style.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
+
+    <!-- script id1 -->
+    <script
+            type="text/javascript"
+            src="/js/js_scripts.js">
+    </script>
+
+
+    <script type="text/javascript" src="/js/jquery.validate.min.js"></script>
+    <!-- script id2 -->
+    <script
+            type="text/javascript"
+            src="/js/js_scripts.js">
+    </script>
+
+    <!-- script id3 -->
+    <script type="text/javascript" src="/js/jquery.jclock.js"></script>
+    <script
+            type="text/javascript" charset="utf-8"
+            src="/js/js_scripts.js">
+    </script>
+
+
+
+</head>
+
+<body class="body">
+
+<header class="mainheader">
+
+    <nav><ul>
+        <li class="active"><a href="#">Restore VM</a></li>
+        <li><a href="#">vCloud</a></li>
+        <li><a href="Daily">Daily</a></li>
+        <li><a href="/new-vm2">New VM</a></li>
+        <li><a href="/Network">Network</a></li>
+        <li><a href="/Phone-Book1">Phone-Book</a></li>
+        <li><a href="#">Future</a></li>
+    </ul></nav>
+</header>
+
+<div class="maincontent">
+    <div class="content">
+        <article class="topcontent">
+            <header>
+                <h2><a href="#" title="Name of VM">Name of VM example : BMW-110-19511</a></h2>
+            </header>
+
+            <footer>
+                <p class="post-info"></p>
+
+                <!--                </footer>-->
+
+                <form name="form_restore_vm_id1" id="form_restore_vm_id1" action="" method="POST">
+                    <fieldset>
+                        <legend>Restore Details</legend>
+                        <div>
+                            <!-- The Namgrgregee form field -->
+                            <label for="user_input1-lebel" id="user_input1-lebel">Virtual Machine Name</label>
+                            <input type="text" name="user_input1" id="user_input1" size="30" autocomplete="off" placeholder="BMW-110-XXX-XXX" autofocus value="" required pattern="[A-Za-z-0-9.]+" aria-required="true" aria-describedby="name-format">
+                            <span id="name-format" class="help">Enter VM Name eg: BMW-115-101.ccccloud.com</span>
+                        </div>
+                        <!--		</fieldset>	-->
+                        <br>
+
+                        <div>
+                            <!-- The rgreg form field -->
+                            <label for="user_input2-lebel" id="user_input2-lebel">Date to restore to</label>
+                            <input type="text" name="user_input2" id="user_input2" autocomplete="off" size="30" value=""/>
+                        </div>
+                        <br>
+                        <div>
+                            <label for="user_input3-lebel" id="user_input3-lebel">VM Owner Email</label>
+                            <input type="email" name="user_input3" id="user_input3" autocomplete="off" size="30" value=""/>
+                        </div>
+
+                        <br>
+                        <div>
+                            <label for="user_input4-lebel" id="user_input4-lebel">Internal Email</label>
+                            <input type="email" name="user_input4" id="user_input4" autocomplete="off" size="30" value=""/>
+                        </div>
+
+                        <style>
+                            label.user_input2-lebel { width: 250px; display: inline; color: red;}
+                        </style>
+                        <br>
+
+
+                        <!--         </form> -->
+
+                        <!-- The Submit button -->
+                    </fieldset>
+
+                    <input type="submit" name="submit" value="Restore VM">
+                </form>
+
+                <!-- We will output the results from restore_ps1.php here -->
+
+            </footer>
+
+            <content>
+                <p></p>
+
+            </content>
+        </article>
+        <article class="second_content">
+            <header>
+                <h2><a href="#" title="Output Restore Summary">Output Restore Summary</a></h2>
+            </header>
+
+            <footer>
+                <p class="post-info">
+                    info  = Information Only. <br>
+                    Debug = Information with Action. <br>
+                    Error = Restore will not complete.
+                </p>
+            </footer>
+
+
+            <content>
+                <p> Read log file.</p>
+
+                <div id="results"></div>
+                <H3> Messages </H3>
+                <hr />
+                <div class="jclock"></div>
+                <div id="messages"><div id="msgold">
+                </div>
+                </div>
+            </content>
+        </article>
+    </div>
+</div>
+
+
+
+<footer class="mainfooter">
+    <p>Beta version 1.1</p>
+
+</footer>
+
+
+
+</body>
+
+
+
+</html>

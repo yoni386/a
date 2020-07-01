@@ -1,0 +1,23 @@
+<div class="modal-header custom-height-modal">
+
+    <h4 class="modal-title">Confirm delete<i class="fa fa-trash-o fa-fw"></i></h4>
+</div>
+
+<div class="modal-body custom-height-modal">
+
+    <div>
+        <h6>Request ID <strong ng-bind="req_id"></strong> <strong ng-bind="vm_name"></strong> will be deleted.</h6>
+    </div>
+
+
+</div>
+
+<div class="modal-footer">
+
+    <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+
+    <button type="submit" class="btn btn-primary" ng-click="fn_req_del(req_id)">OK</button>
+
+
+</div>
+

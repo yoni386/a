@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="myApp"[]>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Phone Book</title>
+
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/normalize.css" rel="stylesheet" media="screen">
+    <link href="css/foundation.min.css" rel="stylesheet" media="screen">
+    <link href="css/app-screen.css" rel="stylesheet" media="screen">
+    <link href="css/app-print.css" rel="stylesheet" media="print">
+    <script src="js/angular.min.js"></script>
+    <script src="js/phone_book2.js"></script>
+
+    <style>
+        table, th , td  {
+            border: 1px solid grey;
+            border-collapse: collapse;
+            padding: 5px;
+
+        }
+        table tr:nth-child(odd)	{
+            background-color: #f1f1f1;
+        }
+        table tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+    </style>
+
+
+</head>
+<body ng-controller="ShoppingListController">
+
+<header class="mainheader">
+
+    <nav><ul>
+        <li class="active"><a href="#">Restore VM</a></li>
+        <li><a href="#">vCloud</a></li>
+        <li><a href="Daily">Daily</a></li>
+        <li><a href="/new-vm2">New VM</a></li>
+        <li><a href="/Network">Network</a></li>
+        <li><a href="/Phone-Book1">Phone-Book</a></li>
+        <li><a href="#">Future</a></li>
+    </ul></nav>
+</header>
+
+<div>
+
+    Search : <input ng-model="search">
+    <br>
+
+    <table>
+          <tr ng-repeat="item in items | filter:search ">
+
+        <!--<tr>grgr</tr>-->
+            <td>{{ item.name }}</td>
+            <td>{{ item.last_name }}</td>
+            <td>{{ item.email }}</td>
+            <td>{{ item.team }}</td>
+            <td>{{ item.phone }}</td>
+            <td>{{ item.floor }}</td>
+          </tr>
+    </table>
+
+</div>
+
+
+
+
+
+</body>
+</html>

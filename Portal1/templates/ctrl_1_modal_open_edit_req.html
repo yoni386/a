@@ -1,0 +1,106 @@
+
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">Modify existing restore request</h4>
+
+</div>
+
+<div class="modal-body">
+
+
+    <form name="form_update_entry_data" novalidate>
+
+
+        <div class="form-group input-group margin-bottom-sm">
+            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+
+            <select class="form-control" ng-model="update_entry_data.requestor_restore_input" label="options" ng-options="x.requestor_name for x in data_service_t_requestor track by x.requestor_name" required>
+                <option value="">{{ requestor_name }}</option>
+
+            </select>
+
+        </div>
+
+
+
+        <div class="form-group input-group margin-bottom-sm">
+            <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+
+            <input type="email" id="owner" class="form-control" name="owner" autocomplete="off" placeholder="Owner Email address" ng-model="update_entry_data.owner_restore_input" ng-init=update_entry_data.owner_restore_input=owner required>
+
+    <span ng-if="update_entry_data.owner_restore_input">
+
+        <span class="close_custom" aria-hidden="true" ng-click="fn_clear_owner_restore_input()">×</span>
+
+    </span>
+
+        </div>
+
+
+
+        <div class="form-group input-group margin-bottom-sm">
+
+            <span class="input-group-addon">
+
+                <span ng-show="!prograssing_vm_ds"><i class="fa fa-spinner fa-spin"></i></span>
+                <span ng-show="prograssing_vm_ds"><i class="fa fa-search"></i></span>
+
+            </span>
+
+            <input class="form-control" type="text" placeholder="Search VM" ng-init=update_entry_data.vm_name_input=vm_name
+
+                   ng-model="update_entry_data.vm_name_input" label="options" ng-change="fn_change_vm_name_input()"
+                   typeahead="x as x.vm_name for x in data_vm_ds | filter:$viewValue | limitTo:13"
+                   typeahead-min-length='1'
+                   typeahead-on-select='onSelectPart($item, $model, $label)'
+                   typeahead-template-url="update_entry_data.vm_name_input.html" required/>
+
+
+            <span ng-if="update_entry_data.vm_name_input">
+
+                <span class="close_custom" aria-hidden="true" ng-click="fn_clear_vm_name_input()">×</span>
+
+            </span>
+
+
+        </div>
+
+        <script type="text/ng-template" id="update_entry_data.vm_name_input.html">
+            <a>
+                <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span>
+            </a>
+        </script>
+
+
+        <span ng-if="update_entry_data.vm_name_input.vm_ds" ng-init="fn_data_vm_ds_data_storage(update_entry_data)"></span>
+
+        <div class="form-group input-group margin-bottom-sm">
+
+            <span class="input-group-addon" ng-show="prograssing_storage_pl"><i class="fa fa-spinner fa-spin"></i></span>
+            <span class="input-group-addon" ng-show="!prograssing_storage_pl"><i class="fa fa-calendar"></i></span>
+
+            <select class="form-control" ng-options="x.snap_date for x in data_storage track by x.snap_date" ng-model="update_entry_data.snap_input" label="options" required>
+
+                <option value="">{{ snap_date }}</option>
+
+            </select>
+
+        </div>
+
+
+
+        <div class="modal-footer">
+
+            <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+
+            <button type="submit" class="btn btn-primary" ng-disabled="form_update_entry_data.$invalid" ng-click="fn_req_edit(id,update_entry_data)">OK</button>
+
+        </div>
+
+    </form>
+
+
+</div>
+
+
+

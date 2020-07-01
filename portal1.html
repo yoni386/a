@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+	<title>Restore VM</title>
+	<meta charset="utf-8" />
+	
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+    	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+  <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
+  <script>
+ $(document).ready(function(){
+    $("#username2").datepicker({
+        minDate: "-4D",
+        maxDate: "0",
+        numberOfMonths: 1,
+        dateFormat: 'm/dd/yy',
+        onSelect: function(selected) {
+          $("#username2").datepicker("option","minDate", selected)
+        }
+    });
+ });
+      </script>
+      
+    
+    	<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+		$.ajaxSetup({timeout: 0});
+		$("#testForm").validate({
+			debug: false,
+			rules: {
+				username1: "required",
+				username2: {
+							required: true,				
+						
+															
+				}
+			},
+			messages: {
+				username1: "Please enter vm name.",
+				username2: "Please enter a date.",
+			},
+			submitHandler: function(form) {	
+			$.ajaxSetup({timeout: 0});
+			// do other stuff for a valid form
+				window.pollingFlag = true;
+				$.post('restore_ps1.php',
+						$("#testForm").serialize(), 
+						function(data) {
+							if (data == "Script is busy, try again in 10 secs!")
+								window.pollingFlag = false;
+							$('#results').html(data);
+							}
+						);
+				if (window.pollingFlag == true)
+					waitForMsg();
+			}
+		});
+	});
+        
+	</script>
+    
+    
+<script type="text/javascript" src="jquery.jclock.js"></script>
+<script type="text/javascript" charset="utf-8">
+var timestamp=null;
+function waitForMsg(){
+$.ajaxSetup({timeout: 0});
+$.ajax({
+		type: "GET",
+		url: "getdata.php?timestamp="+timestamp,
+		async: true,
+		cache: false,
+		
+		success: function(data){
+			var continuePolling = true;
+			//console.log('('+data+ ')');
+			var json=eval('('+data+ ')');
+			if (json['msg'] !="") {
+				//alert( json['msg'] );
+				//Display message here
+				
+				$("#msgold").empty();
+				$("#msgold").append(json['msg'] +"<hr>").slideDown("slow");
+	
+				if (json['msg'] == 	"File is gone!" || json['msg'] == "Process Is Completed.")
+					continuePolling = false;
+				
+				}
+			timestamp =json["timestamp"];
+			if (continuePolling ==true)
+                setTimeout("waitForMsg()",1000);
+		},
+		error: function(XMLHttpRequest,textStatus,errorThrown) {
+	//	 alert("error: "+textStatus + "  "+ errorThrown  );
+		setTimeout("waitForMsg()",15000);
+		}
+	  });
+	}
+	
+	$(document).ready(
+	 function() 
+	 {	
+		 $('.jclock').jclock();
+		 //waitForMsg(); 
+
+	 
+	 });
+
+	 </script>
+    
+    
+</head>
+
+<body class="body">
+  
+	<header class="mainheader">
+		
+		<nav><ul>
+			<li class="active"><a href="#">Restore VM</a></li>
+			<li><a href="#">vCloud</a></li>
+			<li><a href="Daily">Daily</a></li>
+			<li><a href="#">Future</a></li>
+		</ul></nav>
+	</header>
+	
+	<div class="maincontent">
+		<div class="content">
+			<article class="topcontent">
+				<header>
+					<h2><a href="#" title="Name of VM">Name of VM example : VM-110-19511</a></h2>
+				</header>
+				
+				<footer>
+					<p class="post-info"></p>
+                    
+<!--                </footer>-->
+         
+<form name="testForm" id="testForm" action="" method="POST">
+     <fieldset> 
+        <legend>Restore Details</legend>
+             <div> 
+<!-- The Namgrgregee form field -->
+  <label for="username1-lebel" id="username1-lebel">Virtual Machine Name </label>  
+       <input type="text" name="username1" id="username1" size="30" autocomplete="off" placeholder="VM-110-XXX-XXX" autofocus value="" required pattern="[A-Za-z-0-9.]+" aria-required="true" aria-describedby="name-format">
+            <span id="name-format" class="help">Enter VM Name eg: VM-115-101.something.com</span>
+             </div> 
+<!--		</fieldset>	-->
+    <br>
+    
+            <div>
+<!-- The rgreg form field -->
+    <label for="username2-lebel" id="username2-lebel">Date to restore to</label>
+    <input type="text" name="username2" id="username2" autocomplete="off" size="30" value=""/>
+            </div>
+    <br>
+			<div>
+     <label for="username3-lebel" id="username3-lebel">VM Owner Email</label>
+    <input type="email" name="username3" id="username3" autocomplete="off" size="30" value=""/>
+			</div>
+			
+	<br>
+			<div>
+     <label for="username4-lebel" id="username4-lebel">Internal Email</label>
+    <input type="email" name="username4" id="username4" autocomplete="off" size="30" value=""/>
+			</div>
+    
+    <style>
+	label.username2-lebel { width: 250px; display: inline; color: red;}
+	</style>
+   	<br>
+            
+            
+<!--         </form> -->
+   
+<!-- The Submit button -->
+	      	</fieldset> 
+    	
+    	<input type="submit" name="submit" value="Restore VM"> 
+    	</form>
+
+<!-- We will output the results from restore_ps1.php here -->
+					
+				</footer>
+				
+				<content>
+					<p></p>	
+	
+				</content>
+			</article>
+	<article class="second_content">
+			<header>
+				<h2><a href="#" title="Output Restore Summary">Output Restore Summary</a></h2>
+			</header>
+				
+				<footer>
+					<p class="post-info"> 
+						info  = Information Only. <br>
+						Debug = Information with Action. <br>
+						Error = Restore will not complete.  
+					</p>
+				</footer>
+				
+			
+				<content>
+					<p> Read log file.</p>
+					
+				<div id="results"></div>
+			<H3> Messages </H3>
+         <hr />
+					<div class="jclock"></div>
+					<div id="messages"><div id="msgold">
+					</div>
+				</div>
+                </content>
+	</article>
+         	      </div>
+                </div>
+                    
+
+		
+	<footer class="mainfooter">
+		<p>Beta version 1.1</p>
+		
+	</footer>
+	
+	
+	
+</body>
+
+
+
+</html>

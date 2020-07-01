@@ -1,0 +1,437 @@
+
+<title>Restore VM</title>
+
+
+<div class="alerts1">
+
+    <alert class="animate-if_custom_enter_only" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+
+</div>
+
+
+<span ng-include="'partials/tabset_varRequest_varStatus.html'"></span>
+
+
+
+<div class="row form-inline div_add_new_req_refresh_auto_on_off">
+
+    <div class="col-md-8 col-xs-8 .col-sm-8">
+
+        <button class="btn btn-primary btn-sm" name="add_new_req" ng-disable="" ng-click="modal_open_add_req()"> <i class="fa fa-plus"></i></button>
+        <button class="btn btn-default btn-sm" name="refresh_auto_on_off" ng-click="fn_refresh_auto_on_off(refresh_auto_value = { 'true': 'false', 'false':'true'}[refresh_auto_value])" ng-init="refresh_auto_value = 'false'">
+
+            <span ng-if="refresh_auto_value == 'false'"><i class="fa fa-refresh"></i></span>
+            <span ng-if="refresh_auto_value == 'true'"><i class="fa fa-refresh fa-spin"></i></span>
+
+        </button>
+
+
+        <span class="animate-if" ng-if="!searchText[selection_filter_searchText.value].length==0">
+
+            <span class="btn btn-primary btn-sm">  Number of enitries : {{results.length}}</span>
+
+        </span>
+
+
+    </div>
+
+
+
+
+
+    <div class="col-md-4 col-xs-4 .col-sm-4 text-right">
+
+        <div class="input-group margin-bottom-sm">
+            <div class="input-group-addon"><i class="fa fa-search"></i></div>
+            <input type="text" class="form-control input-sm" placeholder="Search" ng-model="searchText[selection_filter_searchText.value]">
+
+            <span ng-if="!searchText[selection_filter_searchText.value].length==0">
+
+                <span class="close_custom" aria-hidden="true" ng-click="fn_clear_selection_filter_searchText()">×</span>
+
+            </span>
+
+        </div>
+
+
+        <select class="form-control input-sm" ng-model="selection_filter_searchText" ng-change="fn_clear_selection_filter_searchText()"
+
+                ng-options="option.name for option in selection_filter_searchText_options">
+
+        </select>
+
+        <i class="fa fa-repeat repeat_custom" ng-click="refresh()"></i>
+
+
+    </div>
+
+
+</div>
+
+
+
+<div class="table1_req_th">
+
+
+    <table class="table table-condensed table-hover table-striped table-responsive">
+
+        <tr class="table-bordered" ng-init="predicate = 'id'; reverse=!reverse">
+
+            <th>
+                <span class="pull-left" ng-init="id_value = 'true'" ng-click="predicate = 'id'; reverse=!reverse; id_value = {'true': 'false', 'false':'true'}[id_value]">
+                    ID
+                    <span ng-if="id_value == 'true'" class="fa fa-caret-down"></span>
+                    <span ng-if="id_value == 'false'" class="fa fa-caret-up"></span>
+                </span>
+            </th>
+
+
+            <th>
+                <span ng-init="vm_name_value = 'false'" ng-click="predicate = 'vm_name'; reverse=!reverse; vm_name_value = {'true': 'false', 'false':'true'}[vm_name_value]">
+                    VM Name
+                    <span ng-if="vm_name_value == 'true'" class="fa fa-caret-down"></span>
+                    <span ng-if="vm_name_value == 'false'" class="fa fa-caret-up"></span>
+                </span>
+            </th>
+
+
+            <th>
+                <span ng-init="snap_date_value = 'false'" ng-click="predicate = 'snap_date_value'; reverse=!reverse; snap_date_value = {'true': 'false', 'false':'true'}[snap_date_value]">
+                   Snap Date <i class="fa fa-calendar"></i>
+                    <span ng-if="snap_date_value == 'true'" class="fa fa-caret-down"></span>
+                    <span ng-if="snap_date_value == 'false'" class="fa fa-caret-up"></span>
+                </span>
+            </th>
+
+
+
+            <th>
+                <span ng-init="requestor_value = 'false'" ng-click="predicate = 'requestor'; reverse=!reverse; requestor_value = {'true': 'false', 'false':'true'}[requestor_value]">
+                   Requestor <i class="fa fa-user"></i>
+                    <span ng-if="requestor_value == 'true'" class="fa fa-caret-down"></span>
+                    <span ng-if="requestor_value == 'false'" class="fa fa-caret-up"></span>
+                </span>
+            </th>
+
+
+
+            <th>
+                <span ng-init="owner_value = 'false'" ng-click="predicate = 'owner'; reverse=!reverse; owner_value = {'true': 'false', 'false':'true'}[owner_value]">
+                Owner <i class="fa fa-envelope-o fa-fw"></i>
+                    <span ng-if="owner_value == 'true'" class="fa fa-caret-down"></span>
+                    <span ng-if="owner_value == 'false'" class="fa fa-caret-up"></span>
+                </span>
+            </th>
+
+
+
+            <th>
+                <span ng-init="state_value = 'false'" ng-click="predicate = 'state'; reverse=!reverse; state_value = {'true': 'false', 'false':'true'}[state_value]">
+                   State
+                    <span ng-if="state_value == 'true'" class="fa fa-caret-down"></span>
+                    <span ng-if="state_value == 'false'" class="fa fa-caret-up"></span>
+                </span>
+            </th>
+
+
+
+            <th>
+                <span class="pull-right"><span>Settings <i class="fa fa-cog"></i></span></span>
+            </th>
+
+
+        </tr>
+
+    </table>
+
+
+</div>
+
+
+
+
+
+<div ng-repeat="x in data | filter:searchText as results"></div>
+
+
+<div ng-repeat="x in data | filter:searchText | orderBy:predicate:reverse">
+
+
+<table class="table1_td table table-hover table-condensed table-striped">
+
+
+<tr>
+
+
+    <td ng-click="fn_ctrl_1_req_id_collapse($index)">
+        <span class="pull-left th_id">
+
+            <a><strong>{{x.id}}</strong> <i class="fa fa-sort-desc"></i></a>
+
+        </span>
+
+    </td>
+
+
+    <td>{{x.vm_name}}</td>
+    <td>{{x.snap_date}}</td>
+    <td>{{x.requestor_name}}</td>
+    <td>{{x.owner}}</td>
+
+    <td class="col-md-1" ng-switch="x.state">
+
+        <div ng-switch-when='1'>
+
+            <div class="animate-if" ng-include="'partials/partial1_state_1.html'"></div>
+
+        </div>
+
+        <div ng-switch-when='2'>
+
+            <div ng-include="'partials/partial1_state_2.html'"></div>
+
+        </div>
+
+        <div ng-switch-when='3'>
+
+            <div ng-include="'partials/partial1_state_3.html'"></div>
+
+        </div>
+
+        <div ng-switch-when='4'>
+
+            <div ng-include="'partials/partial1_state_4.html'"></div>
+
+        </div>
+
+        <div ng-switch-default>
+
+            <div ng-include="'partials/partial1_state_0.html'"></div>
+
+        </div>
+
+    </td>
+
+
+
+    <td>
+
+        <div class="btn-group pull-right" dropdown is-open="status.isopen">
+            <button type="button" class="btn btn-primary btn-sm" name="dropdown1" class="btn btn-primary dropdown-toggle"
+                    dropdown-toggle ng-disabled="!{{ x.state=='0' }}">
+                Actions <span class="caret"></span>
+            </button>
+
+            <ul class="dropdown-menu" role="menu">
+
+                <li><a ng-click="modal_open_confirm_st_restore(x.id, x.vm_name, x.snap_date)"><i class="glyphicon glyphicon-play"></i> Start Restore</a></li>
+
+                <li><a ng-click="modal_open_edit_req(x.id, x.vm_name, x.vm_ds, x.vol_name, x.snap_name, x.snap_date, x.requestor_name, x.requestor_email, x.owner)"><i class="fa fa-pencil-square-o"></i> Modify</a></li>
+
+                <li class="divreq_ider"></li>
+                <li><a ng-click="modal_open_fn_req_del(x.id, x.vm_name)"><i class="fa fa-trash-o fa-fw"></i> Delete</a></li>
+
+            </ul>
+
+        </div>
+
+
+    </td>
+
+
+
+</tr>
+
+
+<div class="n_table1">
+
+
+
+    <tr ng-show="ctrl_1_req_id_collapse[$index]">
+
+        <td colspan="7">
+
+
+            <div class="row">
+
+                <div class="col-md-4 col-xs-4 .col-sm-4 progress_bar1" ng-switch="x.progress_bar1">
+
+
+                    <div ng-switch-default>
+
+                        <p>Storage vMotion</p>
+
+                        <progressbar class="progress-striped active" value=x.progress_bar1 type="dynamic">{{x.progress_bar1}}%</progressbar>
+
+                    </div>
+
+
+                    <div ng-switch-when='100'>
+
+                        <p>Storage vMotion completed</p>
+
+                        <progressbar animate="false" value=x.progress_bar1 type="dynamic">{{x.progress_bar1}}%</progressbar>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-8 col-xs-8 .col-sm-8 pull-right">
+                    <table class="table2 table table-hover table-condensed table-striped">
+                        <thead>
+
+                        <tr>
+
+                            <th>Ref_ID</th>
+                            <th>VC / Storage Connections</th>
+                            <th>Queries & Preparations</th>
+                            <th>Restoring</th>
+                            <th>Cleaning Up</th>
+
+                        </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                        <td>{{x.ref_id}}</td>
+
+
+                        <td ng-switch="x.step1">
+                            <div ng-switch-when='1'>
+
+                                <div ng-include="'partials/partial1_state_1.html'"></div>
+
+                            </div>
+
+                            <div ng-switch-when='2'>
+
+                                <div ng-include="'partials/partial1_state_2.html'"></div>
+
+                            </div>
+                            <div ng-switch-when='3'>
+
+                                <div ng-include="'partials/partial1_state_3.html'"></div>
+
+                            </div>
+
+                            <div ng-switch-default>
+
+                                <div ng-include="'partials/partial1_state_0.html'"></div>
+
+                            </div>
+
+
+                        </td>
+
+
+                        <td ng-switch="x.step2">
+                            <div ng-switch-when='1'>
+
+                                <div ng-include="'partials/partial1_state_1.html'"></div>
+
+                            </div>
+
+                            <div ng-switch-when='2'>
+
+                                <div ng-include="'partials/partial1_state_2.html'"></div>
+
+                            </div>
+                            <div ng-switch-when='3'>
+
+                                <div ng-include="'partials/partial1_state_3.html'"></div>
+                                <i class="fa fa-exclamation-triangle"></i>
+
+                            </div>
+
+                            <div ng-switch-default>
+
+                                <div ng-include="'partials/partial1_state_0.html'"></div>
+
+                            </div>
+
+
+                        </td>
+
+
+                        <td ng-switch="x.step3">
+                            <div ng-switch-when='1'>
+
+                                <div ng-include="'partials/partial1_state_1.html'"></div>
+
+                            </div>
+
+                            <div ng-switch-when='2'>
+
+                                <div ng-include="'partials/partial1_state_2.html'"></div>
+
+                            </div>
+
+                            <div ng-switch-when='3'>
+
+                                <div ng-include="'partials/partial1_state_3.html'"></div>
+
+                            </div>
+
+                            <div ng-switch-default>
+
+                                <div ng-include="'partials/partial1_state_0.html'"></div>
+
+                            </div>
+
+
+                        </td>
+
+
+                        <td ng-switch="x.step4">
+                            <div ng-switch-when='1'>
+
+                                <div ng-include="'partials/partial1_state_1.html'"></div>
+
+                            </div>
+
+                            <div ng-switch-when='2'>
+
+                                <div ng-include="'partials/partial1_state_2.html'"></div>
+
+                            </div>
+
+                            <div ng-switch-when='3'>
+
+                                <div ng-include="'partials/partial1_state_3.html'"></div>
+
+                            </div>
+
+                            <div ng-switch-default>
+
+                                <div ng-include="'partials/partial1_state_0.html'"></div>
+
+                            </div>
+
+
+                        </td>
+
+                        </tbody>
+
+                    </table>
+
+
+                </div>
+
+            </div>
+
+        </td>
+
+
+    </tr>
+
+
+</div>
+
+
+</table>
+
+</div>
+
+

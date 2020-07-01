@@ -1,0 +1,72 @@
+
+<header class="header1">
+
+
+
+    <div ng-init="button_view_navbar1 = 'false'" >
+
+        <div class="animate-if" ng-if="button_view_navbar1 == 'true'">
+
+            <div class="navbar navbar-custom navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header-custom">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a href="#" class="navbar-brand">TripleC</a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="/restore">Restore</a></li>
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Storage <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="/netapp">NetApp</a></li>
+                                    <li><a href="/ibox">IBOX</a></li>
+                                </ul>
+                            </li>
+
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">vCloud</a></li>
+                            <li><a href="#">Daily</a></li>
+                        </ul>
+
+                        <ul class="nav navbar-nav">
+                            <li><a href="#">Link <span class="sr-only">(current)</span></a></li>
+                            <li><a href="#">Link</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">One more separated link</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<div class="col-md-12 col-xs-12 .col-sm-12">
+
+    <div class="button_view_navbar1 fa fa-bars fa-lg" ng-click="button_view_navbar1 = { 'true': 'false', 'false':'true'}[button_view_navbar1]"></div>
+
+</div>
+
+
+

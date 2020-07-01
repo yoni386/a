@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+
+
+	<link rel="stylesheet" href="/css/style.css" type="text/css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+    	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+  <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
+  
+	  <!-- script id1 -->
+	  <!--
+<script 
+	    	type="text/javascript"
+			src="/js/js_scripts.js">
+	    </script>
+-->
+    
+  		    
+
+
+    
+    
+    
+</head>
+
+<body class="body">
+
+<!--
+<div id="draggable" class="ui-widget-content">
+  <p>Drag me around</p>
+</div>
+-->
+  
+	<header class="mainheader">
+		
+		<nav><ul>
+			
+			<li><a href="/">Restore VM</a></li>
+			<li><a href="/form1">Request new restore</a></li>
+			<li><a href="#">vCloud</a></li>
+			<li><a href="Daily">Daily</a></li>
+			<li class="active"><a href="/Network">Network</a></li>
+			<li><a href="#">Future</a></li>
+		</ul></nav>
+	</header>
+	
+	<div class="maincontent">
+		<div class="content">
+		<class="ui-widget-content">
+			<article class="topcontent">
+				<header>
+					<h2><a href="#" title="Find VM by a MAC">Find VM by a MAC : 00:50:56:a8:92:e5</a></h2>
+				</header>
+				
+				<footer>
+					<p class="post-info"></p>
+                    
+<!--                </footer>-->
+         
+<!--<form name="form_find_vm_mac1" id="form_find_vm_mac1" action="restore_ps1.php" method="POST">-->
+<form name="form_find_vm_mac1" id="form_find_vm_mac1" action="find_vm_by_mac_ps1.php" method="POST">
+     <fieldset> 
+        <legend>VM Details</legend>
+             <div> 
+<!-- The Namgrgregee form field -->
+  <label for="user_input1-lebel" id="user_input1-lebel">Virtual Machine Name</label>  
+       <input type="text" name="user_input1" id="user_input1" size="30" autocomplete="off" placeholder="00:50:56:a8:92:e5" autofocus value="" required pattern="[A-Za-z-0-9:]+" aria-required="true" aria-describedby="name-format">
+            <span id="name-format" class="help">Enter mac address eg: 00:50:56:a8:92:e5</span>
+             </div> 
+<!--		</fieldset>	-->
+    <br>
+    
+   <!--
+         <div>
+
+    <label for="user_input2-lebel" id="user_input2-lebel">Date to restore to</label>
+    <input type="text" name="user_input2" id="user_input2" autocomplete="off" size="30" value=""/>
+            </div>
+    <br>
+			<div>
+     <label for="user_input3-lebel" id="user_input3-lebel">VM Owner Email</label>
+    <input type="email" name="user_input3" id="user_input3" autocomplete="off" size="30" value=""/>
+			</div>
+			
+	<br>
+			<div>
+     <label for="user_input4-lebel" id="user_input4-lebel">Internal Email</label>
+    <input type="email" name="user_input4" id="user_input4" autocomplete="off" size="30" value=""/>
+			</div>
+-->
+    
+    <style>
+	label.user_input2-lebel { width: 250px; display: inline; color: red;}
+	</style>
+   	<br>
+            
+            
+<!--         </form> -->
+   
+<!-- The Submit button -->
+	      	</fieldset> 
+    	
+<!--     	<input type="submit" name="submit" value="Restore VM">  -->
+
+ <input type="submit" name="submit" value="Find VM" class="btn btn-primary">
+ 
+ 			<!--
+<script>
+	 			$("#simpleConfirm").confirm();
+			</script>
+-->
+
+
+    	</form>
+
+<!-- We will output the results from restore_ps1.php here -->
+					
+				</footer>
+
+
+
+                <article class="topcontent1">
+                    <header>
+                        <h2><a href="#" title="Check Network">Check Network</a></h2>
+                    </header>
+
+                    <footer>
+                        <p class="post-info"></p>
+
+                        <!--                </footer>-->
+                        
+                        
+                                <!--<form name="form_find_vm_mac1" id="form_find_vm_mac1" action="restore_ps1.php" method="POST">-->
+                                <form name="form_check_network2" id="form_check_network2" action="network_check1.php" method="POST">
+
+                                    <input type="submit" name="submit" value="Check Network Ports" class="btn btn-primary">
+
+
+                                </form>
+                                 
+
+                                <form name="form_check_network2" id="form_check_network2" action="network_check2.php" method="POST">
+
+                                    <input type="submit" name="submit" value="Check Network Up/Down" class="btn btn-primary">
+
+
+                                </form>
+                            
+
+                        
+
+                      
+
+
+                        <!--<article class="topcontent2">-->
+                            <!--<header>-->
+                                <!--<h2><a href="#" title="Check Network">Check Network</a></h2>-->
+                            <!--</header>-->
+
+                            <!--<footer>-->
+                                <!--<p class="post-info"></p>-->
+
+                                <!--&lt;!&ndash;                </footer>&ndash;&gt;-->
+
+                                <!--&lt;!&ndash;<form name="form_find_vm_mac1" id="form_find_vm_mac1" action="restore_ps1.php" method="POST">&ndash;&gt;-->
+                                <!--<form name="form_check_network2" id="form_check_network2" action="network_check2.php" method="POST">-->
+
+                                    <!--<input type="submit" name="submit" value="Check Network" class="btn btn-primary">-->
+
+
+                                <!--</form>-->
+
+				
+				<content>
+					<p></p>
+
+				</content>
+			</article>
+	<article class="second_content">
+			<header>
+				<h2><a href="#" title="Output Restore Summary">Output Restore Summary</a></h2>
+			</header>
+
+				<footer>
+					<p class="post-info">
+						info  = Information Only. <br>
+						Debug = Information with Action. <br>
+						Error = Restore will not complete.
+					</p>
+				</footer>
+
+
+				<content>
+					<p> Read log file.</p>
+					
+				<div id="results"></div>
+			<H3> Messages </H3>
+         <hr />
+
+					<div id="messages"><div id="msgold">
+					</div>
+				</div>
+
+                </content>
+	</article>
+         	      </div>
+                </div>
+
+
+		
+	<footer class="mainfooter">
+		<p>Beta version 1.2</p>
+		
+	</footer>
+	
+	
+	
+</body>
+
+
+
+</html>
